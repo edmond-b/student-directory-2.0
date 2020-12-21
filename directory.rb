@@ -13,13 +13,26 @@ students = [
   "Norman Bates"
 ]
 
+# print header
+def print_header
+  puts "The students of Villans Academy"
+  puts "-------------"
+end
+
 # print the names of each student
-puts "The students of Villans Academy"
-puts "-------------"
-students.each { |student| puts student }
+def print(names)
+  names.each { |name| puts name }
+end
 
 # then we print the number of students
-puts "Overall, we have #{students.count} great students."
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students."
+end
+
+# call methods
+print_header
+print(students)
+print_footer(students)
 
 # manual new lines are done like so
 # print "\nLine 1\nLine 2\nLine 3"
