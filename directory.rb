@@ -1,17 +1,17 @@
 # save the names of the students in an array
-students = [
-  {name: "Dr.Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november}
-]
+# students = [
+#   {name: "Dr.Hannibal Lecter", cohort: :november},
+#   {name: "Darth Vader", cohort: :november},
+#   {name: "Nurse Ratched", cohort: :november},
+#   {name: "Michael Corleone", cohort: :november},
+#   {name: "Alex DeLarge", cohort: :november},
+#   {name: "The Wicked Witch of the West", cohort: :november},
+#   {name: "Terminator", cohort: :november},
+#   {name: "Freddy Krueger", cohort: :november},
+#   {name: "The Joker", cohort: :november},
+#   {name: "Joffrey Baratheon", cohort: :november},
+#   {name: "Norman Bates", cohort: :november}
+# ]
 
 # print header
 def print_header
@@ -29,7 +29,25 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students."
 end
 
+# method for adding new students
+def input_students
+  puts "Please enter the names of new students."
+  puts "To stop adding new names hit enter twice."
+
+  students = []
+  name = gets.chomp
+
+  while !name.empty? do
+    students << {name: name, cohort: :november}
+    puts "Now we have #{students.count} students."
+    name = gets.chomp
+  end
+
+  students
+end
+
 # call methods
+students = input_students
 print_header
 print(students)
 print_footer(students)
