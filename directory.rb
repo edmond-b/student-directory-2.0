@@ -36,9 +36,10 @@ def input_students(list)
 
   students = list
   name = gets.chomp
+  cohort = gets.chomp
 
-  while !name.empty? do
-    students << {name: name, cohort: :november}
+  while !name.empty? && !cohort.empty? do
+    students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students."
     name = gets.chomp
   end
