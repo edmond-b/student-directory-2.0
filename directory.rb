@@ -22,6 +22,15 @@ end
 # print the names of each student
 def print(students)
   students.each_with_index { |student,index| puts "#{index + 1}: #{student[:name]} (#{student[:cohort]} cohort)" }
+  # students_by_month = {}
+  # students.map { |student|
+  #   month = student[:cohort]
+  #   if students_by_month[month] == nil
+  #     students_by_month[month] = []
+  #   end
+  #   students_by_month[month].push(student[:name])
+  #  }
+  #  puts students_by_month
 end
 
 # then we print the number of students
