@@ -13,10 +13,37 @@ list = [
   {name: "Norman Bates", cohort: :november}
 ]
 
+# interactive menu
+def interactive_menu
+
+  students = []
+
+  loop do
+    puts "1: Input students"
+    puts "2: Show students"
+    puts "9: Exit"
+    input = gets.chomp
+
+    case input
+      when "1"
+        students = input_students(students)
+      when "2"
+        print_header
+        print(students)
+        print_footer(students)
+      when "9"
+        exit
+      else
+        puts "I don't know how to do that."
+    end
+
+  end
+end
+
 # print header
 def print_header
   puts "The students of Villans Academy"
-  puts "-------------"
+  puts "-------------------------------"
 end
 
 # print the names of each student
@@ -25,11 +52,11 @@ def print(students)
   # students_by_month = {}
   # students.map { |student|
   #   month = student[:cohort]
-  #   if students_by_month[month] == nil
-  #     students_by_month[month] = []
-  #   end
-  #   students_by_month[month].push(student[:name])
-  #  }
+  #     if students_by_month[month] == nil
+  #       students_by_month[month] = []
+  #     end
+  #     students_by_month[month].push(student[:name])
+  #   }
   #  puts students_by_month
 end
 
@@ -39,11 +66,11 @@ def print_footer(students)
 end
 
 # method for adding new students
-def input_students(list)
+def input_students(students)
   puts "Please enter the names of new students."
   puts "To stop adding new names hit enter twice."
 
-  students = list
+  students = []
   name = gets.chomp
   cohort = gets.chomp
 
@@ -57,7 +84,8 @@ def input_students(list)
 end
 
 # call methods
-students = input_students(list)
-print_header
-print(students)
-print_footer(students)
+interactive_menu
+# students = input_students(list)
+# print_header
+# print(students)
+# print_footer(students)
