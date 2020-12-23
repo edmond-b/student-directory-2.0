@@ -20,7 +20,7 @@
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -81,13 +81,13 @@ def input_students
   puts "Please enter the names of new students."
   puts "To stop adding new names hit enter twice."
 
-  name = gets.chomp
-  cohort = gets.chomp
+  name = STDIN.gets.chomp
+  cohort = STDIN.gets.chomp
 
   while !name.empty? && !cohort.empty? do
     @students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{@students.count} students."
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
 end
 
@@ -105,13 +105,30 @@ def save_students
 end
 
 # load students from csv file
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(file_name="students.csv")
+  file = File.open(file_name, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
+
+# load student list on program boot
+def try_load_students
+  file_name = ARGV.first
+  return if file_name.nil?
+  if File.exists?(file_name)
+    load_students(file_name)
+    puts "Loaded #{@students.count} from #{file_name}"
+  else
+    puts "Sorry, #{file_name} doesn't exist"
+    exit
+  end
+end
+
+# load list if argument is given on boot
+try_load_students
+
 # call method
 interactive_menu
