@@ -85,16 +85,28 @@ def input_students
   cohort = STDIN.gets.chomp
 
   while !name.empty? && !cohort.empty? do
-    @students << {name: name, cohort: cohort.to_sym}
+    insert(name, cohort)
     puts "Now we have #{@students.count} students."
     name = STDIN.gets.chomp
   end
 end
 
+# insert student hash into array
+def insert(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 # save student list to csv file
 def save_students
   #open file for writing
-  file = File.open("students.csv", "w")
+  puts "what file would you like to save to..."
+  puts "press enter for defult"
+  filename = gets.chomp
+  if filename.nil?
+    file = File.open("students.csv", "w")
+  else
+    file = File.open(filename, "w")
+  end
   # itarate over student array
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -106,12 +118,12 @@ end
 
 # load students from csv file
 def load_students(file_name="students.csv")
-  file = File.open(file_name, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+  file = File.open(file_name, "r") do |f|
+    f.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      insert(name, cohort)
+    end
   end
-  file.close
 end
 
 # load student list on program boot
