@@ -33,6 +33,8 @@ def process(input)
       show_students
     when "3"
       save_students
+    when "4"
+      load_students
     when "9"
       exit
     else
@@ -45,6 +47,7 @@ def print_menu
   puts "1: Input students"
   puts "2: Show students"
   puts "3: Save student list"
+  puts "4: Load student list from csv"
   puts "9: Exit"
 end
 
@@ -94,12 +97,21 @@ def save_students
   file = File.open("students.csv", "w")
   # itarate over student array
   @students.each do |student|
-    sudent_data = [student[:name], student[:cohort]]
+    student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
   file.close
 end
 
+# load students from csv file
+def load_students
+  file = File.open("students.csv", "r")
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(",")
+    @students << {name: name, cohort: cohort.to_sym}
+  end
+  file.close
+end
 # call method
 interactive_menu
